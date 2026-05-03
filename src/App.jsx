@@ -19,7 +19,7 @@ import {
   where,
 } from "firebase/firestore";
 import { auth } from "./firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
 import Auth from "./Auth";
 import { useLang } from "./useLang";
 import NavIcon from "./NavIcons";
@@ -68,6 +68,8 @@ export default function App() {
   };
 
   useEffect(() => {
+    getRedirectResult(auth).catch(() => {});
+
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
