@@ -1483,36 +1483,151 @@ select option:checked {
   .tj-strat-grid {
     grid-template-columns: 1fr;
   }
-  .container {
-    padding: 16px 12px 24px;
+
+  /* Layout */
+  .app-shell {
+    display: block;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .lang-switch-floating {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    padding: 16px 14px 90px;
   }
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
-  .tabs {
+  /* Mobile header */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: linear-gradient(160deg, #1e1710 0%, #17130d 100%);
+    border-bottom: 1px solid #2d2620;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    gap: 8px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
+  }
+
+  .mobile-header .brand-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    box-shadow: 0 0 14px rgba(196,98,45,0.3);
+  }
+
+  .mobile-header .brand-kicker {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+  }
+
+  .mobile-header .brand-title {
+    font-size: 0.85rem;
+    margin: 2px 0 0;
+  }
+
+  .mobile-header-right {
+    display: flex;
+    align-items: center;
     gap: 6px;
-    margin-inline: -12px;
-    padding-inline: 12px;
-    padding-bottom: 4px;
+    flex-shrink: 0;
   }
 
-  .brand-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+  .mobile-header-right > div {
+    margin-bottom: 0 !important;
   }
 
-  .brand-title {
-    font-size: 1.05rem;
+  .mobile-header-right .lang-switch {
+    margin-bottom: 0;
   }
 
-  .tab {
-    padding: 9px 14px;
-    font-size: 0.82rem;
+  .mobile-header-right button {
+    width: auto !important;
+    padding: 5px 9px;
+    font-size: 0.78rem;
   }
 
+  .mobile-header-right span {
+    display: none;
+  }
+
+  /* Bottom navigation */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #17130d;
+    border-top: 1px solid #2d2620;
+    z-index: 200;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .bnav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 2px 10px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: #4b4038;
+    font-size: 0.54rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+    min-width: 0;
+    line-height: 1;
+    width: auto !important;
+  }
+
+  .bnav-item .tab-icon {
+    width: 22px;
+    height: 22px;
+    opacity: 1;
+  }
+
+  .bnav-item .tab-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bnav-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 46px;
+    display: block;
+  }
+
+  .bnav-active {
+    color: #c4622d;
+  }
+
+  /* Content adjustments */
   .top {
     flex-direction: column;
   }
@@ -1530,9 +1645,9 @@ select option:checked {
     flex-direction: column;
   }
 
-  input,
-  select,
-  button {
+  .main-content input,
+  .main-content select,
+  .main-content button:not(.del-btn):not(.filter-btn):not(.mood-btn):not(.icon-btn):not(.pom-mode-btn):not(.habit-toggle):not(.cancel-btn):not(.update-btn):not(.prompt-btn) {
     width: 100%;
   }
 
@@ -1554,7 +1669,11 @@ select option:checked {
   }
 
   .portfolio-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dash-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -1590,6 +1709,16 @@ select option:checked {
 
 .lang-switch .lang-btn {
   width: auto;
+}
+
+/* Mobile header — hidden on desktop */
+.mobile-header {
+  display: none;
+}
+
+/* Bottom nav — hidden on desktop */
+.bottom-nav {
+  display: none;
 }
 
 /* ── Trading Journal Pro ── */

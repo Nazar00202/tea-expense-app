@@ -157,6 +157,23 @@ export default function App() {
         </button>
       </div>
 
+      <header className="mobile-header">
+        <div className="mobile-brand">
+          <img className="brand-logo" src="/logo.svg" alt="Focus Life logo" />
+          <div className="brand-copy">
+            <p className="brand-kicker">DTR</p>
+            <p className="brand-title">{t("appName")}</p>
+          </div>
+        </div>
+        <div className="mobile-header-right">
+          <div className="lang-switch">
+            <button type="button" className={lang === "ua" ? "lang-btn active" : "lang-btn"} onClick={() => setLang("ua")}>{t("langUa")}</button>
+            <button type="button" className={lang === "en" ? "lang-btn active" : "lang-btn"} onClick={() => setLang("en")}>{t("langEn")}</button>
+          </div>
+          <Auth user={user} />
+        </div>
+      </header>
+
       <aside className="sidebar">
         <div className="sidebar-top">
           <div className="brand">
@@ -303,6 +320,19 @@ export default function App() {
           </div>
         )}
       </main>
+
+      <nav className="bottom-nav">
+        {TABS.map((tabItem) => (
+          <button
+            key={tabItem.id}
+            className={tab === tabItem.id ? "bnav-item bnav-active" : "bnav-item"}
+            onClick={() => setTab(tabItem.id)}
+          >
+            <NavIcon tabId={tabItem.id} active={tab === tabItem.id} />
+            <span>{t(tabItem.labelKey)}</span>
+          </button>
+        ))}
+      </nav>
     </div>
   );
 }
