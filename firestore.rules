@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function ownsNewDoc() {
+      return signedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
+    function ownsExistingDoc() {
+      return signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read, write: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /expenses/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /tasks/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /goals/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /habits/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /journal/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /portfolio/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /budgets/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+
+    match /tradingJournal/{docId} {
+      allow create: if ownsNewDoc();
+      allow read, update, delete: if ownsExistingDoc();
+    }
+  }
+}
