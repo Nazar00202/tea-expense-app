@@ -1,12 +1,16 @@
-﻿import { signInWithRedirect, signOut } from "firebase/auth";
+﻿import { signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
 import { auth, provider } from "./firebase";
 import { useLang } from "./useLang";
 
 export default function Auth({ user }) {
   const { t } = useLang();
 
-  const login = async () => {
-    await signInWithRedirect(auth, provider);
+  const login = () => {
+    signInWithPopup(auth, provider).catch((error) => {
+      if (error.code === "auth/popup-blocked" || error.code === "auth/popup-cancelled-by-user") {
+        signInWithRedirect(auth, provider);
+      }
+    });
   };
 
   const logout = async () => {

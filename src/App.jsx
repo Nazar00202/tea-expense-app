@@ -68,7 +68,9 @@ export default function App() {
   };
 
   useEffect(() => {
-    getRedirectResult(auth).catch(() => {});
+    getRedirectResult(auth).then((result) => {
+      if (result?.user) setUser(result.user);
+    }).catch(() => {});
 
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
